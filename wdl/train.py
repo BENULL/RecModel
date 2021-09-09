@@ -8,7 +8,7 @@
 import tensorflow as tf
 import os
 
-from WDL.model import WideDeep
+from wdl.model import WideDeep
 from dataprocess.dataprocess_ml import create_ml_dataset
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'

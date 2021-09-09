@@ -13,7 +13,7 @@ from tensorflow.keras.regularizers import l2
 from tensorflow.python.keras.feature_column.dense_features_v2 import DenseFeatures
 from tensorflow.python.keras.layers import concatenate
 
-from WDL.modules import Linear, DNN
+from wdl.modules import Linear, DNN
 
 
 class WideDeep(Model):
