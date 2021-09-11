@@ -8,7 +8,7 @@
 import tensorflow as tf
 import os
 
-from wdl.model import WideDeep
+from deepfm.model import DeepFM
 from deepfm.dataprocess_ml import create_ml_dataset
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
@@ -22,9 +22,7 @@ if __name__ == '__main__':
 
     # ========================= Hyper Parameters =======================
     dnn_dropout = 0.5
-    hidden_units = [128, 128]
-
-    learning_rate = 0.001
+    hidden_units = [64, 64]
     batch_size = 12
     epochs = 5
 
@@ -33,9 +31,8 @@ if __name__ == '__main__':
     # ============================Build Model==========================
     mirrored_strategy = tf.distribute.MirroredStrategy()
     with mirrored_strategy.scope():
-        model = WideDeep(linear_feature_columns=feature_columns['crossed_columns'],
-                         dnn_feature_columns=feature_columns['numerical_columns'] + feature_columns[
-                             'categorical_columns'])
+        model = DeepFM(linear_feature_columns=feature_columns['sparse_feature_columns'],
+                       dnn_feature_columns=feature_columns['dense_feature_columns'])
 
         # ============================Compile============================
 
