@@ -16,7 +16,8 @@ DeepFM=DNN+FM
 
 
 这个模型分为**FM部分和Deep部分**，和Wide & Deep模型不同的是，DeepFM两部分共享原始输入特征
-![latex](https://latex.codecogs.com/gif.latex?\hat{y}=\operatorname{sigmoid}\left(y_{F&space;M}&plus;y_{D&space;N&space;N}\right))
+
+![latexs](https://latex.codecogs.com/gif.latex?%5Chat%7By%7D%3D%5Coperatorname%7Bsigmoid%7D%5Cleft%28y_%7BF%20M%7D&plus;y_%7BD%20N%20N%7D%5Cright%29)
 
 在输入特征部分，由于原始特征向量大多是高度稀疏的连续和类别混合的分域特征，为了更好的发挥DNN模型学习高阶特征的能力，文中设计了一套子网络结构，将原始的稀疏表示特征映射为稠密的特征向量。
 
@@ -41,7 +42,9 @@ DeepFM=DNN+FM
 FM主要是解决稀疏数据下的特征组合问题，并且其预测的复杂度是线性的，对于连续和离散特征有较好的通用性。
 [FM论文地址](https://www.csie.ntu.edu.tw/~b97053/paper/Rendle2010FM.pdf)
 下面是FM二阶部分的数学形式。FM为每个特征学习了一个隐权重向量。在特征交叉时，使用两个向量的内积![latex](https://latex.codecogs.com/gif.latex?\left\langle&space;V_{i},&space;V_{j}\right\rangle)作为交叉特征的权重。
+
 ![latex](https://latex.codecogs.com/gif.latex?y_{F&space;M}=\langle&space;w,&space;x\rangle&plus;\sum_{j_{1}=1}^{d}&space;\sum_{j_{2}=j_{1}&plus;1}^{d}\left\langle&space;V_{i},&space;V_{j}\right\rangle&space;x_{j_{1}}&space;\cdot&space;x_{j_{2}})
+
 本质上,FM引入隐向量的做法，与矩阵分解用隐向量代表用户和物品的做法异曲同工。可以说，FM是将矩阵分解隐向量的思想进行了进一步扩展，从单纯的用户、物品隐向量扩展到了所有特征上。
 
 在工程方面,FM同样可以用梯度下降法进行学习，使其不失实时性和灵活性。相比之后深度学习模型复杂的网络结构导致难以部署和线上服务，FM较容易实现的模型结构使其线上推断的过程相对简单，也更容易进行线上部署和服务。因此，FM在2012一2014年前后，成为业界主流的推荐模型之一。
