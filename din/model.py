@@ -21,7 +21,6 @@ class DIN(Model):
         """
         DIN
         :param feature_columns: A list. dense_feature_columns + sparse_feature_columns
-        :param behavior_feature_list: A list. the list of behavior feature names
         :param att_hidden_units: A tuple or list. Attention hidden units.
         :param dnn_hidden_units: A tuple or list. Hidden units list of FFN.
         :param att_activation: A String. The activation of attention.
@@ -42,7 +41,7 @@ class DIN(Model):
         self.dnn_network = DNN(dnn_hidden_units, dnn_activation, dnn_dropout)
         self.output_layer = Dense(1, activation='sigmoid')
 
-    def call(self, inputs):
+    def call(self, inputs, **kwargs):
         candidate_emb = self.candidate_layer(inputs)  # (None, d)
         user_behaviors_emb = self.user_behaviors_layer(inputs)  # (None, lens_k*d)
         user_behaviors_emb = Reshape((self.behaviors_nums, -1))(user_behaviors_emb)
