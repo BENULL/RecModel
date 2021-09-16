@@ -48,7 +48,7 @@ class DIN(Model):
         user_profile_emb = self.user_profile_layer(inputs)
         context_features_emb = self.context_features_layer(inputs)
 
-        # attention   (q, k, keys_length)
+        # attention
         activation_unit = self.attention_layer((candidate_emb, user_behaviors_emb,))
         all_input = tf.concat([activation_unit, user_profile_emb, context_features_emb], axis=-1)
 
